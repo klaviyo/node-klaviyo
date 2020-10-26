@@ -4,7 +4,8 @@
   "description": "Klaviyo API wrapper",
   "main": "./lib/klaviyo.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha \"./test/unit/*.js\"",
+    "test-with-coverage": "nyc --reporter=html mocha \"./test/unit/*.js\""
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,10 @@
   "homepage": "https://github.com/klaviyo/node-klaviyo#readme",
   "dependencies": {},
   "devDependencies": {
-    "mocha": "^8.0.1"
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^8.2.0",
+    "nyc": "^15.1.0",
+    "sinon": "^9.2.0"
   }
 }
