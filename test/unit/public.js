@@ -1,0 +1,421 @@
+'use strict';
+
+const
+    Klaviyo = require('/Users/nate.paradis/Klaviyo/Repos/node-klaviyo'),
+    {
+        KlaviyoError
+    } = require('../../lib/errors.js'),
+    Public = require('../../lib/public.js'),
+    querystring = require('querystring'),
+    nock = require('nock'),
+    chai = require('chai'),
+    chaiAsPromised = require('chai-as-promised'),
+    should = chai.should();
+
+//chai plugins
+chai.use(chaiAsPromised);
+
+/**
+ * test data
+ */
+const
+    publicToken = 'qwerty',
+    KlaviyoClient = new Klaviyo({
+        publicToken: publicToken
+    }),
+    klaviyoApiServer = 'https://a.klaviyo.com:443',
+    fakeEmail = 'myFakeEmail@mailinator.com',
+    fakeExternalId = 'myFakeId',
+    testEvent = 'Test Event',
+    fakeIp = '127.0.0.1',
+    nowTimestamp = Math.floor(Date.now() / 1000);
+
+/**
+ * Using 'normal' anonymous functions instead of arrow/lambdas here because
+ * of this note in the mocha documentation: https://mochajs.org/#arrow-functions
+ */
+describe('Public', function () {
+    before(function () {
+        nock.disableNetConnect();
+    });
+    afterEach(function () {
+        nock.cleanAll();
+    });
+    after(function () {
+        nock.restore();
+    });
+    describe('#buildQuery()', function () {
+        //this should theoretically never happen... but test coverage!
+        context('is called without any arguments', function () {
+            it('should return "data=e30%3D&test=0"', function () {
+                const expected = querystring.encode({
+                    data: Buffer.from(JSON.stringify({})).toString('base64'),
+                    test: 0
+                });
+                Public.buildQuery().should.equal(expected);
+            })
+        });
+    });
+    describe('#identify()', function () {
+        context('is called without an email or ID', function () {
+            it('should throw a KlaviyoError', function () {
+                should.Throw(function () {
+                    KlaviyoClient.public.identify();
+                }, KlaviyoError);
+            });
+        });
+        context('is called with an email', function () {
+            const options = {
+                email: fakeEmail,
+                isTest: false
+            };
+            const data = {
+                token: publicToken,
+                properties: {
+                    email: fakeEmail,
+                }
+            }
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 0
+            };
+            it('should eventually return 1', function () {
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/identify')
+                    .query(query)
+                    .reply(200, '1');
+
+                KlaviyoClient.public.identify(options).should.eventually.equal(1);
+            });
+        });
+        context('is called with an ID', function () {
+            const options = {
+                id: fakeExternalId,
+                isTest: false
+            };
+            const data = {
+                token: publicToken,
+                properties: {
+                    id: fakeExternalId
+                }
+            }
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 0
+            };
+            it('should eventually return 1', function () {
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/identify')
+                    .query(query)
+                    .reply(200, '1');
+
+                KlaviyoClient.public.identify(options).should.eventually.equal(1);
+            });
+        });
+        context('is called with an email or ID, with isTest set to true', function () {
+            const options = {
+                email: fakeEmail,
+                id: fakeExternalId,
+                isTest: true
+            };
+            const data = {
+                token: publicToken,
+                properties: {
+                    email: fakeEmail,
+                    id: fakeExternalId
+                }
+            }
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 1
+            };
+            it('should eventually return 1', function () {
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/identify')
+                    .query(query)
+                    .reply(200, '1');
+
+                KlaviyoClient.public.identify(options).should.eventually.equal(1);
+            });
+        });
+    });
+    /**
+     * All #track() and #trackOnce() tests have a hardcoded timestamp passed
+     * This is to prevent faulty test failures due to timing weirdness
+     */
+    describe('#track()', function () {
+        context('is called without providing an email or ID', function () {
+            it('should throw a KlaviyoError', function () {
+                should.Throw(function () {
+                    KlaviyoClient.public.track();
+                }, KlaviyoError);
+            });
+        });
+        context('is called without providing an event name', function () {
+            it('should throw a KlaviyoError', function () {
+                should.Throw(function () {
+                    KlaviyoClient.public.track({
+                        email: fakeEmail,
+                        id: fakeExternalId
+                    });
+                }, KlaviyoError);
+            });
+        });
+        context('is called with a valid email and an event name', function () {
+            const options = {
+                event: testEvent,
+                email: fakeEmail,
+                isTest: false
+            };
+            const data = {
+                token: publicToken,
+                event: testEvent,
+                properties: {},
+                customer_properties: {
+                    email: fakeEmail
+                },
+                time: nowTimestamp
+            };
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 0
+            };
+            it('should eventually return 1', function () {
+                //nock.recorder.rec();
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/track')
+                    .query(query)
+                    .reply(200, '1');
+
+                KlaviyoClient.public.track(options).should.eventually.equal(1);
+                //nock.restore();
+            });
+        });
+        context('is called with a valid ID and an event name', function () {
+            const options = {
+                event: testEvent,
+                id: fakeExternalId,
+                isTest: false
+            };
+            const data = {
+                token: publicToken,
+                event: testEvent,
+                properties: {},
+                customer_properties: {
+                    id: fakeExternalId
+                },
+                time: nowTimestamp
+            }
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 0
+            };
+            it('should eventually return 1', function () {
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/track')
+                    .query(query)
+                    .reply(200, '1');
+
+                KlaviyoClient.public.track(options).should.eventually.equal(1);
+            });
+        });
+        context('is called with a valid email or ID and an event name, with isTest set to true', function () {
+            const options = {
+                event: testEvent,
+                email: fakeEmail,
+                id: fakeExternalId,
+                isTest: true
+            };
+            const data = {
+                token: publicToken,
+                event: testEvent,
+                properties: {},
+                customer_properties: {
+                    email: fakeEmail,
+                    id: fakeExternalId
+                },
+                time: nowTimestamp
+            }
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 1
+            };
+            it('should eventually return 1', function () {
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/track')
+                    .query(query)
+                    .reply(200, '1');
+
+                KlaviyoClient.public.track(options).should.eventually.equal(1);
+            });
+        });
+        context('is called with a valid email or ID, event name, and IP Address', function () {
+            const options = {
+                event: testEvent,
+                email: fakeEmail,
+                id: fakeExternalId,
+                isTest: false,
+                ipAddress: fakeIp
+            };
+            const data = {
+                token: publicToken,
+                event: testEvent,
+                properties: {},
+                customer_properties: {
+                    email: fakeEmail,
+                    id: fakeExternalId
+                },
+                time: nowTimestamp,
+                ip: fakeIp
+            }
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 0
+            };
+            it('should eventually return 1', function () {
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/track')
+                    .query(query)
+                    .reply(200, '1');
+
+                KlaviyoClient.public.track(options).should.eventually.equal(1);
+            });
+        });
+    });
+    describe('#trackOnce()', function () {
+        context('is called without providing an email or ID', function () {
+            it('should throw a KlaviyoError', function () {
+                should.Throw(function () {
+                    KlaviyoClient.public.trackOnce();
+                }, KlaviyoError);
+            });
+        });
+        context('is called without providing an event name', function () {
+            it('should throw a KlaviyoError', function () {
+                should.Throw(function () {
+                    KlaviyoClient.public.trackOnce({
+                        email: fakeEmail,
+                        id: fakeExternalId
+                    });
+                }, KlaviyoError);
+            });
+        });
+        context('is called with a valid email or ID and an event name', function () {
+            const options = {
+                event: testEvent,
+                email: fakeEmail,
+                id: fakeExternalId,
+                isTest: false
+            };
+            const data = {
+                token: publicToken,
+                event: testEvent,
+                properties: {
+                    '__track_once__': true
+                },
+                customer_properties: {
+                    email: fakeEmail,
+                    id: fakeExternalId
+                },
+                time: nowTimestamp
+            }
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 0
+            };
+            it('should eventually return 1', function () {
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/track')
+                    .query(query)
+                    .reply(200, '1');
+
+                KlaviyoClient.public.trackOnce(options).should.eventually.equal(1);
+            });
+        });
+        context('is called with a valid email or ID and an event name, with isTest set to true', function () {
+            const options = {
+                event: testEvent,
+                email: fakeEmail,
+                id: fakeExternalId,
+                isTest: true,
+            };
+            const data = {
+                token: publicToken,
+                event: testEvent,
+                properties: {
+                    '__track_once__': true
+                },
+                customer_properties: {
+                    email: fakeEmail,
+                    id: fakeExternalId
+                },
+                time: nowTimestamp
+            }
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 1
+            };
+            it('should eventually return 1', function () {
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/track')
+                    .query(query)
+                    .reply(200, '1');
+                return KlaviyoClient.public.trackOnce(options).should.eventually.equal(1);
+            });
+        });
+        context('is called with a valid email or ID, event name, and IP Address', function () {
+            const options = {
+                event: testEvent,
+                email: fakeEmail,
+                id: fakeExternalId,
+                isTest: false,
+                ipAddress: fakeIp
+            };
+            const data = {
+                token: publicToken,
+                event: testEvent,
+                properties: {
+                    '__track_once__': true
+                },
+                customer_properties: {
+                    email: fakeEmail,
+                    id: fakeExternalId
+                },
+                time: nowTimestamp,
+                ip: fakeIp
+            }
+            const query = {
+                data: Buffer.from(JSON.stringify(data)).toString('base64'),
+                test: 0
+            };
+            it('should eventually return 1', function () {
+                nock(klaviyoApiServer, {
+                        encodedQueryParams: true
+                    })
+                    .get('/api/track')
+                    .query(query)
+                    .reply(200, '1');
+
+                KlaviyoClient.public.trackOnce(options).should.eventually.equal(1);
+            });
+        });
+    });
+});
