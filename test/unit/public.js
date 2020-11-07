@@ -5,8 +5,6 @@ const
     {
         KlaviyoError
     } = require('../../lib/errors.js'),
-    Public = require('../../lib/public.js'),
-    querystring = require('querystring'),
     nock = require('nock'),
     chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
@@ -37,24 +35,13 @@ const
 describe('Public', function () {
     before(function () {
         nock.disableNetConnect();
+        if (!nock.isActive()) nock.activate()
     });
     afterEach(function () {
         nock.cleanAll();
     });
     after(function () {
         nock.restore();
-    });
-    describe('#buildQuery()', function () {
-        //this should theoretically never happen... but test coverage!
-        context('is called without any arguments', function () {
-            it('should return "data=e30%3D&test=0"', function () {
-                const expected = querystring.encode({
-                    data: Buffer.from(JSON.stringify({})).toString('base64'),
-                    test: 0
-                });
-                Public.buildQuery().should.equal(expected);
-            })
-        });
     });
     describe('#identify()', function () {
         context('is called without an email or ID', function () {
@@ -70,10 +57,10 @@ describe('Public', function () {
                 isTest: false
             };
             const data = {
-                token: publicToken,
                 properties: {
                     email: fakeEmail,
-                }
+                },
+                token: publicToken
             }
             const query = {
                 data: Buffer.from(JSON.stringify(data)).toString('base64'),
@@ -96,10 +83,10 @@ describe('Public', function () {
                 isTest: false
             };
             const data = {
-                token: publicToken,
                 properties: {
                     id: fakeExternalId
-                }
+                },
+                token: publicToken
             }
             const query = {
                 data: Buffer.from(JSON.stringify(data)).toString('base64'),
@@ -123,11 +110,11 @@ describe('Public', function () {
                 isTest: true
             };
             const data = {
-                token: publicToken,
                 properties: {
                     email: fakeEmail,
                     id: fakeExternalId
-                }
+                },
+                token: publicToken
             }
             const query = {
                 data: Buffer.from(JSON.stringify(data)).toString('base64'),
@@ -186,8 +173,8 @@ describe('Public', function () {
                 data: Buffer.from(JSON.stringify(data)).toString('base64'),
                 test: 0
             };
+            console.log(query);
             it('should eventually return 1', function () {
-                //nock.recorder.rec();
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
@@ -196,7 +183,6 @@ describe('Public', function () {
                     .reply(200, '1');
 
                 KlaviyoClient.public.track(options).should.eventually.equal(1);
-                //nock.restore();
             });
         });
         context('is called with a valid ID and an event name', function () {

@@ -3,8 +3,7 @@
 const
     Klaviyo = require('/Users/nate.paradis/Klaviyo/Repos/node-klaviyo'),
     {
-        KlaviyoError,
-        KlaviyoApiError
+        KlaviyoError
     } = require('../../lib/errors.js'),
     nock = require('nock'),
     chai = require('chai'),
@@ -18,7 +17,6 @@ chai.use(chaiAsPromised);
 const {
     fakeProfileId,
     fakeMetricId,
-    fakeInvalidProfileId,
     profileData,
     timelineData
 } = require('./fixtures/profiles.js');

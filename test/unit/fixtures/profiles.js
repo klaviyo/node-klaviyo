@@ -3,7 +3,6 @@
 const
     fakeEmail = 'myFakeEmail@mailinator.com',
     fakeProfileId = 'qwerty',
-    fakeInvalidProfileId = 'asdfgh',
     fakeMetricId = 'zxcvbn',
     profileData = {
         myCustomProperty: true,
@@ -78,7 +77,6 @@ const
 module.exports = {
     fakeProfileId,
     fakeMetricId,
-    fakeInvalidProfileId,
     profileData,
     timelineData
 }
