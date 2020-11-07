@@ -37,9 +37,13 @@ const
 describe('Profiles', function () {
     before(function () {
         nock.disableNetConnect();
+        if (!nock.isActive()) nock.activate()
     });
     afterEach(function () {
         nock.cleanAll();
+    });
+    after(function () {
+        nock.restore();
     });
     describe('#getProfile()', function () {
         context('is called without a profile ID', function () {
