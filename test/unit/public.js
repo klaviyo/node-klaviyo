@@ -61,17 +61,16 @@ describe('Public', function () {
                     email: fakeEmail,
                 },
                 token: publicToken
-            }
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 0
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/identify')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 0;
+                    })
                     .reply(200, '1');
 
                 KlaviyoClient.public.identify(options).should.eventually.equal(1);
@@ -87,17 +86,16 @@ describe('Public', function () {
                     id: fakeExternalId
                 },
                 token: publicToken
-            }
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 0
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/identify')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 0;
+                    })
                     .reply(200, '1');
 
                 KlaviyoClient.public.identify(options).should.eventually.equal(1);
@@ -115,17 +113,16 @@ describe('Public', function () {
                     id: fakeExternalId
                 },
                 token: publicToken
-            }
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 1
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/identify')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 1;
+                    })
                     .reply(200, '1');
 
                 KlaviyoClient.public.identify(options).should.eventually.equal(1);
@@ -169,17 +166,15 @@ describe('Public', function () {
                 },
                 time: nowTimestamp
             };
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 0
-            };
-            console.log(query);
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/track')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 0;
+                    })
                     .reply(200, '1');
 
                 KlaviyoClient.public.track(options).should.eventually.equal(1);
@@ -200,16 +195,15 @@ describe('Public', function () {
                 },
                 time: nowTimestamp
             }
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 0
-            };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/track')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 0;
+                    })
                     .reply(200, '1');
 
                 KlaviyoClient.public.track(options).should.eventually.equal(1);
@@ -223,25 +217,24 @@ describe('Public', function () {
                 isTest: true
             };
             const data = {
-                token: publicToken,
                 event: testEvent,
                 properties: {},
                 customer_properties: {
                     email: fakeEmail,
                     id: fakeExternalId
                 },
-                time: nowTimestamp
-            }
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 1
+                time: nowTimestamp,
+                token: publicToken
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/track')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 1;
+                    })
                     .reply(200, '1');
 
                 KlaviyoClient.public.track(options).should.eventually.equal(1);
@@ -265,17 +258,16 @@ describe('Public', function () {
                 },
                 time: nowTimestamp,
                 ip: fakeIp
-            }
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 0
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/track')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 0;
+                    })
                     .reply(200, '1');
 
                 KlaviyoClient.public.track(options).should.eventually.equal(1);
@@ -318,17 +310,16 @@ describe('Public', function () {
                     id: fakeExternalId
                 },
                 time: nowTimestamp
-            }
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 0
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/track')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 0;
+                    })
                     .reply(200, '1');
 
                 KlaviyoClient.public.trackOnce(options).should.eventually.equal(1);
@@ -352,18 +343,18 @@ describe('Public', function () {
                     id: fakeExternalId
                 },
                 time: nowTimestamp
-            }
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 1
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/track')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 1;
+                    })
                     .reply(200, '1');
+
                 return KlaviyoClient.public.trackOnce(options).should.eventually.equal(1);
             });
         });
@@ -387,17 +378,16 @@ describe('Public', function () {
                 },
                 time: nowTimestamp,
                 ip: fakeIp
-            }
-            const query = {
-                data: Buffer.from(JSON.stringify(data)).toString('base64'),
-                test: 0
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
                         encodedQueryParams: true
                     })
                     .get('/api/track')
-                    .query(query)
+                    .query(queryObject => { 
+                        const decoded = Buffer.from(queryObject.data, 'base64').toString('ascii');
+                        return compareData(decoded, data) && queryObject.test == 0;
+                    })
                     .reply(200, '1');
 
                 KlaviyoClient.public.trackOnce(options).should.eventually.equal(1);
@@ -405,3 +395,10 @@ describe('Public', function () {
         });
     });
 });
+
+function compareData(object1, object2) {
+    Object.keys(object1).forEach(function (key) {
+        if(object2[key] == null) return false;
+    });
+    return true;
+}
