@@ -166,12 +166,12 @@ KlaviyoClient.lists.addSubscribersToList({
             pizzaSubscriptionType: 'Premium'
         },
         {
-            email: 'salami.sam@mailinator.com'
+            email: 'salami.sam@mailinator.com',
             phone_number: '+12223334444',
             sms_consent: true
         },
         {
-            email: 'lasagna.larry@mailinator.com'
+            email: 'lasagna.larry@mailinator.com',
             push_token: 'myPushToken'
         }
     ]
@@ -186,12 +186,12 @@ KlaviyoClient.lists.getSubscribersFromList({
             pizzaSubscriptionType: 'Premium'
         },
         {
-            email: 'salami.sam@mailinator.com'
+            email: 'salami.sam@mailinator.com',
             phone_number: '+12223334444',
             sms_consent: true
         },
         {
-            email: 'lasagna.larry@mailinator.com'
+            email: 'lasagna.larry@mailinator.com',
             push_token: 'myPushToken'
         }
     ]
@@ -206,12 +206,12 @@ KlaviyoClient.lists.deleteSubscribersFromList({
             pizzaSubscriptionType: 'Premium'
         },
         {
-            email: 'salami.sam@mailinator.com'
+            email: 'salami.sam@mailinator.com',
             phone_number: '+12223334444',
             sms_consent: true
         },
         {
-            email: 'lasagna.larry@mailinator.com'
+            email: 'lasagna.larry@mailinator.com',
             push_token: 'myPushToken'
         }
     ]
@@ -226,12 +226,12 @@ KlaviyoClient.lists.addMembersToList({
             pizzaSubscriptionType: 'Premium'
         },
         {
-            email: 'salami.sam@mailinator.com'
+            email: 'salami.sam@mailinator.com',
             phone_number: '+12223334444',
             sms_consent: true
         },
         {
-            email: 'lasagna.larry@mailinator.com'
+            email: 'lasagna.larry@mailinator.com',
             push_token: 'myPushToken'
         }
     ]
@@ -268,7 +268,7 @@ KlaviyoClient.lists.removeMembersFromList({
             sms_consent: true
         },
         {
-            email: 'lasagna.larry@mailinator.com'
+            email: 'lasagna.larry@mailinator.com',
             push_token: 'myPushToken'
         }
     ]
