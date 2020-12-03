@@ -45,6 +45,15 @@ describe('Profiles', function () {
     after(function () {
         nock.restore();
     });
+    describe('#token', function () {
+        context('attempting to set #token', function () {
+            it('should throw a KlaviyoError', function () {
+                should.Throw(function () {
+                    KlaviyoClient.profiles.token = 'newToken';
+                }, KlaviyoError);
+            });
+        });
+    });
     describe('#getProfile()', function () {
         context('is called without a profile ID', function () {
             it('should throw a KlaviyoError', function () {

@@ -25,8 +25,7 @@ const
     fakeEmail = 'myFakeEmail@mailinator.com',
     fakeExternalId = 'myFakeId',
     testEvent = 'Test Event',
-    fakeIp = '127.0.0.1',
-    nowTimestamp = Math.floor(Date.now() / 1000);
+    fakeIp = '127.0.0.1';
 
 /**
  * Using 'normal' anonymous functions instead of arrow/lambdas here because
@@ -42,6 +41,15 @@ describe('Public', function () {
     });
     after(function () {
         nock.restore();
+    });
+    describe('#token', function () {
+        context('attempting to set #token', function () {
+            it('should throw a KlaviyoError', function () {
+                should.Throw(function () {
+                    KlaviyoClient.public.token = 'newToken';
+                }, KlaviyoError);
+            });
+        });
     });
     describe('#identify()', function () {
         context('is called without an email or ID', function () {
@@ -129,10 +137,6 @@ describe('Public', function () {
             });
         });
     });
-    /**
-     * All #track() and #trackOnce() tests have a hardcoded timestamp passed
-     * This is to prevent faulty test failures due to timing weirdness
-     */
     describe('#track()', function () {
         context('is called without providing an email or ID', function () {
             it('should throw a KlaviyoError', function () {
@@ -163,8 +167,7 @@ describe('Public', function () {
                 properties: {},
                 customer_properties: {
                     email: fakeEmail
-                },
-                time: nowTimestamp
+                }
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
@@ -192,8 +195,7 @@ describe('Public', function () {
                 properties: {},
                 customer_properties: {
                     id: fakeExternalId
-                },
-                time: nowTimestamp
+                }
             }
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
@@ -223,7 +225,6 @@ describe('Public', function () {
                     email: fakeEmail,
                     id: fakeExternalId
                 },
-                time: nowTimestamp,
                 token: publicToken
             };
             it('should eventually return 1', function () {
@@ -256,7 +257,6 @@ describe('Public', function () {
                     email: fakeEmail,
                     id: fakeExternalId
                 },
-                time: nowTimestamp,
                 ip: fakeIp
             };
             it('should eventually return 1', function () {
@@ -308,8 +308,7 @@ describe('Public', function () {
                 customer_properties: {
                     email: fakeEmail,
                     id: fakeExternalId
-                },
-                time: nowTimestamp
+                }
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
@@ -341,8 +340,7 @@ describe('Public', function () {
                 customer_properties: {
                     email: fakeEmail,
                     id: fakeExternalId
-                },
-                time: nowTimestamp
+                }
             };
             it('should eventually return 1', function () {
                 nock(klaviyoApiServer, {
@@ -376,7 +374,6 @@ describe('Public', function () {
                     email: fakeEmail,
                     id: fakeExternalId
                 },
-                time: nowTimestamp,
                 ip: fakeIp
             };
             it('should eventually return 1', function () {
@@ -396,6 +393,7 @@ describe('Public', function () {
     });
 });
 
+//utility function to compare decoded base64 payloads
 function deepEqual(object1, object2) {
     const keys1 = Object.keys(object1);
     const keys2 = Object.keys(object2);

@@ -10,14 +10,8 @@ const
     Profiles = require('../../lib/profiles.js'),
     Metrics = require('../../lib/metrics.js'),
     Lists = require('../../lib/lists.js'),
-    querystring = require('querystring'),
-    nock = require('nock'),
     chai = require('chai'),
-    chaiAsPromised = require('chai-as-promised'),
     should = chai.should();
-
-//chai plugins
-chai.use(chaiAsPromised);
 
 /**
  * test data
@@ -46,7 +40,7 @@ describe('Klaviyo', function () {
         });
     });
     context('is initialized without a publicToken', function () {
-        describe('Klaviyo.public', function () {
+        describe('#public', function () {
             it('should throw a KlaviyoConfigurationError', function () {
                 should.Throw(function () {
                     PrivateKlaviyoClient.public
@@ -55,21 +49,21 @@ describe('Klaviyo', function () {
         });
     });
     context('is initialized without a privateToken', function () {
-        describe('Klaviyo.profiles', function () {
+        describe('#profiles', function () {
             it('should throw a KlaviyoConfigurationError', function () {
                 should.Throw(function () {
                     PublicKlaviyoClient.profiles
                 }, KlaviyoConfigurationError);
             });
         });
-        describe('Klaviyo.metrics', function () {
+        describe('#metrics', function () {
             it('should throw a KlaviyoConfigurationError', function () {
                 should.Throw(function () {
                     PublicKlaviyoClient.metrics
                 }, KlaviyoConfigurationError);
             });
         });
-        describe('Klaviyo.lists', function () {
+        describe('#lists', function () {
             it('should throw a KlaviyoConfigurationError', function () {
                 should.Throw(function () {
                     PublicKlaviyoClient.lists
@@ -78,12 +72,12 @@ describe('Klaviyo', function () {
         });
     });
     context('is initialized with a publicToken', function () {
-        describe('Klaviyo.public', function () {
+        describe('#public', function () {
             it('should return an instance of the Public class', function () {
                 should.exist(PublicKlaviyoClient.public);
                 PublicKlaviyoClient.public.should.be.an.instanceof(Public);
             });
-            describe('attempting to set Klaviyo.public', function () {
+            describe('attempting to set #public', function () {
                 it('should throw a KlaviyoError', function () {
                     should.Throw(function () {
                         PublicKlaviyoClient.public = null;
@@ -93,12 +87,12 @@ describe('Klaviyo', function () {
         });
     });
     context('is initialized with a privateToken', function () {
-        describe('Klaviyo.profiles', function () {
+        describe('#profiles', function () {
             it('should return an instance of the Profiles class', function () {
                 should.exist(PrivateKlaviyoClient.profiles);
                 PrivateKlaviyoClient.profiles.should.be.an.instanceof(Profiles);
             });
-            describe('attempting to set Klaviyo.profiles', function () {
+            describe('attempting to set #profiles', function () {
                 it('should throw a KlaviyoError', function () {
                     should.Throw(function () {
                         PrivateKlaviyoClient.profiles = null;
@@ -106,12 +100,12 @@ describe('Klaviyo', function () {
                 });
             });
         });
-        describe('Klaviyo.metrics', function () {
+        describe('#metrics', function () {
             it('should return an instance of the Metrics class', function () {
                 should.exist(PrivateKlaviyoClient.metrics);
                 PrivateKlaviyoClient.metrics.should.be.an.instanceof(Metrics);
             });
-            describe('attempting to set Klaviyo.metrics', function () {
+            describe('attempting to set #metrics', function () {
                 it('should throw a KlaviyoError', function () {
                     should.Throw(function () {
                         PrivateKlaviyoClient.metrics = null;
@@ -119,12 +113,12 @@ describe('Klaviyo', function () {
                 });
             });
         });
-        describe('Klaviyo.lists', function () {
+        describe('#lists', function () {
             it('should return an instance of the Lists class', function () {
                 should.exist(PrivateKlaviyoClient.lists);
                 PrivateKlaviyoClient.lists.should.be.an.instanceof(Lists);
             });
-            describe('attempting to set Klaviyo.public', function () {
+            describe('attempting to set #lists', function () {
                 it('should throw a KlaviyoError', function () {
                     should.Throw(function () {
                         PrivateKlaviyoClient.lists = null;
