@@ -1,7 +1,7 @@
 'use strict';
 
 const
-    Klaviyo = require('/Users/nate.paradis/Klaviyo/Repos/node-klaviyo'),
+    Klaviyo = require('node-klaviyo'),
     {
         KlaviyoError
     } = require('../../lib/errors.js'),
