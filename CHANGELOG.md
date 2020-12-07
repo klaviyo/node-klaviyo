@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Added
 - Created CHANGELOG.md
 
-### [1.0.0] 2020
+### [1.0.0] 2020-12-07
 
 #### Added
 - Support for Public API endpoints (track and identify)
