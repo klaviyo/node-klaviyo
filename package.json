@@ -1,0 +1,29 @@
+{
+  "name": "node-klaviyo",
+  "version": "1.0.0",
+  "description": "Klaviyo API wrapper",
+  "main": "./lib/klaviyo.js",
+  "scripts": {
+    "test": "mocha \"./test/unit/*.js\"",
+    "test-with-coverage": "nyc --reporter=html mocha \"./test/unit/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klaviyo/node-klaviyo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/klaviyo/node-klaviyo/issues"
+  },
+  "homepage": "https://github.com/klaviyo/node-klaviyo#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^8.2.0",
+    "nock": "^13.0.4",
+    "nyc": "^15.1.0"
+  }
+}
