@@ -1,6 +1,6 @@
 {
   "name": "node-klaviyo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Klaviyo API wrapper",
   "main": "./lib/klaviyo.js",
   "scripts": {
