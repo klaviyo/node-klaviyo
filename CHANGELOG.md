@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### [Unreleased]
 
-### [1.0.2] -  2021-01-13
+### [1.0.2] - 2021-01-13
 
 #### Added
 - Changelog diff links
@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Fixed
 - Delete methods now return an empty object on success, rather than raising an "Unexpected end of JSON input" error.
 
-### [1.0.1] -  2020-12-07
+### [1.0.1] - 2020-12-07
 
 #### Added
 - Created CHANGELOG.md
