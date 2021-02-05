@@ -14,9 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added `retryAfter` property to KlaviyoRateLimitError
 
-### Added
-- Added `retryAfter` property to KlaviyoRateLimitError
-
 ### [1.0.2] - 2021-01-13
 
 #### Added
