@@ -10,6 +10,7 @@ const
     Profiles = require('../../lib/profiles.js'),
     Metrics = require('../../lib/metrics.js'),
     Lists = require('../../lib/lists.js'),
+    DataPrivacy = require('../../lib/data-privacy.js'),
     chai = require('chai'),
     should = chai.should();
 
@@ -70,6 +71,13 @@ describe('Klaviyo', function () {
                 }, KlaviyoConfigurationError);
             });
         });
+        describe('#dataprivacy', function () {
+            it('should throw a KlaviyoConfigurationError', function () {
+                should.Throw(function () {
+                    PublicKlaviyoClient.dataprivacy
+                }, KlaviyoConfigurationError);
+            });
+        });
     });
     context('is initialized with a publicToken', function () {
         describe('#public', function () {
@@ -122,6 +130,19 @@ describe('Klaviyo', function () {
                 it('should throw a KlaviyoError', function () {
                     should.Throw(function () {
                         PrivateKlaviyoClient.lists = null;
+                    }, KlaviyoError);
+                });
+            });
+        });
+        describe('#dataprivacy', function () {
+            it('should return an instance of the DataPrivacy class', function () {
+                should.exist(PrivateKlaviyoClient.dataprivacy);
+                PrivateKlaviyoClient.dataprivacy.should.be.an.instanceof(DataPrivacy);
+            });
+            describe('attempting to set #dataprivacy', function () {
+                it('should throw a KlaviyoError', function () {
+                    should.Throw(function () {
+                        PrivateKlaviyoClient.dataprivacy = null;
                     }, KlaviyoError);
                 });
             });
