@@ -71,10 +71,10 @@ describe('Klaviyo', function () {
                 }, KlaviyoConfigurationError);
             });
         });
-        describe('#dataprivacy', function () {
+        describe('#dataPrivacy', function () {
             it('should throw a KlaviyoConfigurationError', function () {
                 should.Throw(function () {
-                    PublicKlaviyoClient.dataprivacy
+                    PublicKlaviyoClient.dataPrivacy
                 }, KlaviyoConfigurationError);
             });
         });
@@ -134,15 +134,15 @@ describe('Klaviyo', function () {
                 });
             });
         });
-        describe('#dataprivacy', function () {
+        describe('#dataPrivacy', function () {
             it('should return an instance of the DataPrivacy class', function () {
-                should.exist(PrivateKlaviyoClient.dataprivacy);
-                PrivateKlaviyoClient.dataprivacy.should.be.an.instanceof(DataPrivacy);
+                should.exist(PrivateKlaviyoClient.dataPrivacy);
+                PrivateKlaviyoClient.dataPrivacy.should.be.an.instanceof(DataPrivacy);
             });
-            describe('attempting to set #dataprivacy', function () {
+            describe('attempting to set #dataPrivacy', function () {
                 it('should throw a KlaviyoError', function () {
                     should.Throw(function () {
-                        PrivateKlaviyoClient.dataprivacy = null;
+                        PrivateKlaviyoClient.dataPrivacy = null;
                     }, KlaviyoError);
                 });
             });
