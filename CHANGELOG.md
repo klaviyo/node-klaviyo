@@ -36,7 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for [Metrics API](https://www.klaviyo.com/docs/api/metrics)
 - Support for [V2 List API](https://www.klaviyo.com/docs/api/v2/lists)
 
-[Unreleased]: https://github.com/klaviyo/node-klaviyo/compare/1.0.3...HEAD
+[Unreleased]: https://github.com/klaviyo/node-klaviyo/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/klaviyo/node-klaviyo/compare/1.0.3...1.1.0
 [1.0.3]: https://github.com/klaviyo/node-klaviyo/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/klaviyo/node-klaviyo/compare/26cf1da1612e3a2aea924210e2a48486345f474b...1.0.2
 [1.0.1]: https://github.com/klaviyo/node-klaviyo/compare/c63216437dc38e98ffd86c88df3c6f6a63381934...26cf1da1612e3a2aea924210e2a48486345f474b
