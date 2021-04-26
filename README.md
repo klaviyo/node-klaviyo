@@ -34,7 +34,7 @@ The below examples showcase common usage for the available classes in the SDK, b
 #### [Public](https://www.klaviyo.com/docs/http-api)
 These APIs are used for tracking people and the events or actions they do. For instance, tracking when someone is active on your website, when a purchase is made, or when someone watches a video. 
 ```javascript
-//Identify a user - create/update a profile in Klaviyo
+// Identify a user - create/update a profile in Klaviyo
 KlaviyoClient.public.identify({
     email: 'pizza.dave@mailinator.com',
     properties: {
@@ -44,7 +44,7 @@ KlaviyoClient.public.identify({
     }
 });
 
-//Track a user's behavior - create an event in Klaviyo
+// Track a user's behavior - create an event in Klaviyo
 KlaviyoClient.public.track({
     event: 'Ordered Pizza',
     email: 'pizza.dave@mailinator.com',
@@ -71,10 +71,10 @@ KlaviyoClient.public.track({
 #### [Profiles](https://www.klaviyo.com/docs/api/people)
 The Profiles API is used for managing profile records in Klaviyo.
 ```javascript
-//Get a profile by its ID in Klaviyo
+// Get a profile by its ID in Klaviyo
 KlaviyoClient.profiles.getProfile('myProfileId');
 
-//Update a profile in Klaviyo
+// Update a profile in Klaviyo
 KlaviyoClient.profiles.updateProfile({
     profileId: 'myProfileId'
     properties: {
@@ -82,7 +82,7 @@ KlaviyoClient.profiles.updateProfile({
     }
 });
 
-//Get the timeline for all events on a profile.
+// Get the timeline for all events on a profile.
 KlaviyoClient.profiles.getProfileMetricsTimeline({
     profileId: 'myProfileId',
     since: 1606262400,
@@ -90,7 +90,7 @@ KlaviyoClient.profiles.getProfileMetricsTimeline({
     sort: 'asc'
 });
 
-//Get the timeline for a specific metric on a profile.
+// Get the timeline for a specific metric on a profile.
 KlaviyoClient.profiles.getProfileMetricsTimelineById({
     profileId: 'myProfileId',
     metricId: 'myMetricId',
@@ -99,12 +99,12 @@ KlaviyoClient.profiles.getProfileMetricsTimelineById({
     sort: 'desc'
 });
 
-//Unset properties on a profile.
+// Unset properties on a profile.
 KlaviyoClient.profiles.unsetProfileProperties({
     profileId: 'myProfileId',
     properties: [
         'favoriteFood',
-        'likesOnions'
+        'last_purchase_date'
     ]
 });
 ```
@@ -112,20 +112,20 @@ KlaviyoClient.profiles.unsetProfileProperties({
 #### [Metrics](https://www.klaviyo.com/docs/api/metrics)
 The Metrics API is used for retrieval of historical event data in Klaviyo. 
 ```javascript
-//Fetches all metrics inside of an account.
+// Fetches all metrics inside of an account.
 KlaviyoClient.metrics.getMetrics({
     page: 2,
     count: 50
 });
 
-//Fetches all of the metrics and its events regardless of the statistic.
+// Fetches all of the metrics and its events regardless of the statistic.
 KlaviyoClient.metrics.getMetricsTimeline({
     since: 1606262400,
     count: 100,
     sort: 'asc'
 });
 
-//Returns a timeline of events for a specific metric.
+// Returns a timeline of events for a specific metric.
 KlaviyoClient.metrics.getMetricTimelineById({
     metricId: 'myMetricId',
     since: 1606262400,
@@ -133,7 +133,7 @@ KlaviyoClient.metrics.getMetricTimelineById({
     sort: 'desc'
 });
 
-//Exports metric values (counts, uniques, totals).
+// Exports metric values (counts, uniques, totals).
 KlaviyoClient.metrics.getMetricExport({
     metricId: 'myMetricId',
     start_date: 2020-11-25,
@@ -148,25 +148,25 @@ KlaviyoClient.metrics.getMetricExport({
 #### [Lists](https://www.klaviyo.com/docs/api/v2/lists)
 This API is used for creating profiles and managing list memberships and subscriptions. This API currently only supports subscribing customers and adding customers to lists. If you would like to manage your segments you can do so from the [lists and segments page](https://www.klaviyo.com/lists).
 ```javascript
-//Get the list of Klaviyo lists on the account.
+// Get the list of Klaviyo lists on the account.
 KlaviyoClient.lists.getLists();
 
-//Create a new list in Klaviyo.
+// Create a new list in Klaviyo.
 KlaviyoClient.lists.createList('My New List');
 
-//Gets list details by list ID.
+// Gets list details by list ID.
 KlaviyoClient.lists.getListById('myListId');
 
-//Change the name of the indicated list to the provided name.
+// Change the name of the indicated list to the provided name.
 KlaviyoClient.lists.updateListNameById({
     listId: 'myListId',
     listName: 'New List Name Goes Here'
 });
 
-//Delete a list by its ID.
+// Delete a list by its ID.
 KlaviyoClient.lists.deleteList('myListId');
 
-//Uses the subscribe endpoint to subscribe user to list, this obeys the list opt-in settings.
+// Uses the subscribe endpoint to subscribe user to list, this obeys the list opt-in settings.
 KlaviyoClient.lists.addSubscribersToList({
     listId: 'myListId',
     profiles: [
@@ -186,7 +186,7 @@ KlaviyoClient.lists.addSubscribersToList({
     ]
 });
 
-//Check if profiles are on a list and not suppressed.
+// Check if profiles are on a list and not suppressed.
 KlaviyoClient.lists.getSubscribersFromList({
     listId: 'myListId',
     emails: [
@@ -203,7 +203,7 @@ KlaviyoClient.lists.getSubscribersFromList({
     ]
 });
 
-//Delete and remove profiles from list.
+// Delete and remove profiles from list.
 KlaviyoClient.lists.deleteSubscribersFromList({
     listId: 'myListId',
     emails: [
@@ -213,7 +213,7 @@ KlaviyoClient.lists.deleteSubscribersFromList({
     ]
 });
 
-//Adds a member to a list regardless of opt-in settings.
+// Adds a member to a list regardless of opt-in settings.
 KlaviyoClient.lists.addMembersToList({
     listId: 'myListId',
     profiles: [
@@ -233,7 +233,7 @@ KlaviyoClient.lists.addMembersToList({
     ]
 });
 
-//Check if profiles are on a list.
+// Check if profiles are on a list.
 KlaviyoClient.lists.getMembersFromList({
     listId: 'myListId',
     emails: [
@@ -250,7 +250,7 @@ KlaviyoClient.lists.getMembersFromList({
     ]
 });
 
-//Remove profiles from a list.
+// Remove profiles from a list.
 KlaviyoClient.lists.removeMembersFromList({
     listId: 'myListId',
     emails: [
@@ -267,13 +267,13 @@ KlaviyoClient.lists.removeMembersFromList({
     ]
 });
 
-//Get all of the emails that have been excluded from a list along with the exclusion reason and exclusion time.
+// Get all of the emails that have been excluded from a list along with the exclusion reason and exclusion time.
 KlaviyoClient.lists.getListExclusions({
     listId: 'myListId',
     marker: 'myMarkerFromPreviousResponse'
 });
 
-//Get all of the emails in a given list or segment.
+// Get all of the emails in a given list or segment.
 KlaviyoClient.lists.getAllMembers({
     groupId: 'mySegmentOrListId',
     marker: 'myMarkerFromPreviousResponse'
