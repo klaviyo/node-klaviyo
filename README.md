@@ -98,6 +98,15 @@ KlaviyoClient.profiles.getProfileMetricsTimelineById({
     count: 10,
     sort: 'desc'
 });
+
+//Unset properties on a profile.
+KlaviyoClient.profiles.unsetProfileProperties({
+    profileId: 'myProfileId',
+    properties: [
+        'favoriteFood',
+        'likesOnions'
+    ]
+});
 ```
 
 #### [Metrics](https://www.klaviyo.com/docs/api/metrics)
