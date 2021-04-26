@@ -104,7 +104,8 @@ KlaviyoClient.profiles.unsetProfileProperties({
     profileId: 'myProfileId',
     properties: [
         'favoriteFood',
-        'last_purchase_date'
+        'last_purchase_date',
+        'This one has spaces'
     ]
 });
 ```
