@@ -30,7 +30,7 @@ The functions available in this SDK return a promise, which will resolve or reje
 Most functions accept a kwarg-style options object. The exception to this rule are functions with 1 or 0 arguments.
 
 ### Examples
-The below examples showcase common usage for the available classes in the SDK, but is by no means a comprehensive guide. For a full list of the arguments for a given function, please refer to the docstring for that function. 
+The below examples showcase common usage for the available classes in the SDK, but is by no means a comprehensive guide. For a full list of the arguments for a given function, please refer to the docstring for that function.
 #### [Public](https://apidocs.klaviyo.com/reference/track-identify)
 These APIs are used for tracking people and the events or actions they do. For instance, tracking when someone is active on your website, when a purchase is made, or when someone watches a video.
 
@@ -67,7 +67,8 @@ KlaviyoClient.public.track({
     },
     customerProperties: {
         likesOnions: true
-    }
+    },
+    timestamp: 1532806824
 });
 ```
 
@@ -117,7 +118,7 @@ KlaviyoClient.profiles.unsetProfileProperties({
 ```
 
 #### [Metrics](https://apidocs.klaviyo.com/reference/metrics)
-The Metrics API is used for retrieval of historical event data in Klaviyo. 
+The Metrics API is used for retrieval of historical event data in Klaviyo.
 ```javascript
 // Fetches all metrics inside of an account.
 KlaviyoClient.metrics.getMetrics({
