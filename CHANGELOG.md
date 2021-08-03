@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### [Unreleased]
 #### Added
 - Added examples to README for methods tied to people/search and data-privacy/deletion-request
+- Added language to Public API section of the README to explain usage of new post option
 
 #### Fixed
 - Updated API documentation links to use new subdomain (apidocs.klaviyo.com)
