@@ -31,8 +31,10 @@ Most functions accept a kwarg-style options object. The exception to this rule a
 
 ### Examples
 The below examples showcase common usage for the available classes in the SDK, but is by no means a comprehensive guide. For a full list of the arguments for a given function, please refer to the docstring for that function. 
-#### [Public](https://www.klaviyo.com/docs/http-api)
-These APIs are used for tracking people and the events or actions they do. For instance, tracking when someone is active on your website, when a purchase is made, or when someone watches a video. 
+#### [Public](https://apidocs.klaviyo.com/reference/track-identify)
+These APIs are used for tracking people and the events or actions they do. For instance, tracking when someone is active on your website, when a purchase is made, or when someone watches a video.
+
+The SDK supports both [GET](https://apidocs.klaviyo.com/reference/track-identify#track-get) and [POST](https://apidocs.klaviyo.com/reference/track-identify#track-post) requests for these endpoints via the `post` flag in the method options.
 ```javascript
 // Identify a user - create/update a profile in Klaviyo
 KlaviyoClient.public.identify({
@@ -41,7 +43,8 @@ KlaviyoClient.public.identify({
         $first_name: 'Pizza',
         $last_name: 'Dave',
         favoriteFood: 'Pad thai'
-    }
+    },
+    post: true //defaults to false
 });
 
 // Track a user's behavior - create an event in Klaviyo
@@ -68,11 +71,14 @@ KlaviyoClient.public.track({
 });
 ```
 
-#### [Profiles](https://www.klaviyo.com/docs/api/people)
+#### [Profiles](https://apidocs.klaviyo.com/reference/profiles)
 The Profiles API is used for managing profile records in Klaviyo.
 ```javascript
 // Get a profile by its ID in Klaviyo
 KlaviyoClient.profiles.getProfile('myProfileId');
+
+// Get a profile ID by email
+KlaviyoClient.profiles.getProfileIdByEmail('pizza.dave@mailinator.com');
 
 // Update a profile in Klaviyo
 KlaviyoClient.profiles.updateProfile({
@@ -110,7 +116,7 @@ KlaviyoClient.profiles.unsetProfileProperties({
 });
 ```
 
-#### [Metrics](https://www.klaviyo.com/docs/api/metrics)
+#### [Metrics](https://apidocs.klaviyo.com/reference/metrics)
 The Metrics API is used for retrieval of historical event data in Klaviyo. 
 ```javascript
 // Fetches all metrics inside of an account.
@@ -146,7 +152,7 @@ KlaviyoClient.metrics.getMetricExport({
 });
 ```
 
-#### [Lists](https://www.klaviyo.com/docs/api/v2/lists)
+#### [Lists](https://apidocs.klaviyo.com/reference/lists-segments)
 This API is used for creating profiles and managing list memberships and subscriptions. This API currently only supports subscribing customers and adding customers to lists. If you would like to manage your segments you can do so from the [lists and segments page](https://www.klaviyo.com/lists).
 ```javascript
 // Get the list of Klaviyo lists on the account.
@@ -278,5 +284,15 @@ KlaviyoClient.lists.getListExclusions({
 KlaviyoClient.lists.getAllMembers({
     groupId: 'mySegmentOrListId',
     marker: 'myMarkerFromPreviousResponse'
+});
+```
+
+#### [Data Privacy](https://apidocs.klaviyo.com/reference/data-privacy)
+This API is used to submit data privacy-compliant deletion requests.
+```javascript
+// Request a data privacy-compliant deletion for a person record
+KlaviyoClient.dataPrivacy.requestProfileDeletion({
+    identifier: 'pizza.dave@mailinator.com',
+    id_type: 'email' //can also use 'phone_number' or 'person_id'
 });
 ```

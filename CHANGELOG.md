@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [Unreleased]
+#### Added
+- Added examples to README for methods tied to people/search and data-privacy/deletion-request
+- Added language to Public API section of the README to explain usage of new post option
+
+#### Fixed
+- Updated API documentation links to use new subdomain (apidocs.klaviyo.com)
+
 ### [1.1.2] - 2021-08-03
 
 #### Added
