@@ -61,7 +61,8 @@ accented characters increasing the length of the payload
 - Support for [Metrics API](https://www.klaviyo.com/docs/api/metrics)
 - Support for [V2 List API](https://www.klaviyo.com/docs/api/v2/lists)
 
-[Unreleased]: https://github.com/klaviyo/node-klaviyo/compare/1.1.2...HEAD
+[Unreleased]: https://github.com/klaviyo/node-klaviyo/compare/1.1.3...HEAD
+[1.1.3]: https://github.com/klaviyo/node-klaviyo/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/klaviyo/node-klaviyo/compare/1.1.1...1.1.2
 [1.1.1]: https://github.com/klaviyo/node-klaviyo/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/klaviyo/node-klaviyo/compare/1.0.3...1.1.0
