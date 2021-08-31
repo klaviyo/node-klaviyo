@@ -5,12 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### [Unreleased]
+
+### [1.1.3] - 2021-08-31
+
 #### Added
 - Added examples to README for methods tied to people/search and data-privacy/deletion-request
 - Added language to Public API section of the README to explain usage of new post option
+- Added timestamp to Track example in README
 
 #### Fixed
 - Updated API documentation links to use new subdomain (apidocs.klaviyo.com)
+- Bump browserslist from 4.16.3 to 4.16.6
+- Use Buffer.byteLength(data) instead of data.length to account for encoding of
+accented characters increasing the length of the payload
 
 ### [1.1.2] - 2021-08-03
 
