@@ -2,7 +2,7 @@
 
 ## Deprecation Notice
 
-This SDK and its associated [NPM Package](https://www.npmjs.com/package/klaviyo-sdk) is set to be deprecated on 2023-04-01
+This SDK and its associated [NPM Package](https://www.npmjs.com/package/node-klaviyo) is set to be deprecated on 2023-04-01
 and will not receive further updates. To continue receiving API and SDK improvements, please follow the instructions below to migrate to the new Klaviyo Node SDK, which you can find on [Github](https://github.com/klaviyo/klaviyo-node-sdk).
 
 ## Migration Instructions
