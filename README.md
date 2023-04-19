@@ -2,8 +2,10 @@
 
 ## Deprecation Notice
 
-This SDK and its associated [NPM Package](https://www.npmjs.com/package/node-klaviyo) is set to be deprecated on 2023-04-01
-and will not receive further updates. To continue receiving API and SDK improvements, please follow the instructions below to migrate to the new Klaviyo Node SDK, which you can find on [Github](https://github.com/klaviyo/klaviyo-node-sdk).
+This SDK and its associated [NPM Package](https://www.npmjs.com/package/node-klaviyo) is deprecated and set to be retired on 2024-01-01
+and will not receive further updates. Use our latest Klaviyo Node SDK to take advantage of our new APIs and to continue to receive SDK updates. You can find out latest Klaviyo Node SDK linked [here](https://github.com/klaviyo/klaviyo-api-node).
+
+If you need help migrating, please follow the instructions below and read our [Migrating from V1/V2 to the new Klaviyo APIs](https://developers.klaviyo.com/en/docs/migrating-from-v1v2-to-the-new-klaviyo-apis) and [Comparison between v1/v2 and new APIs](https://developers.klaviyo.com/en/docs/apis_comparison_chart).
 
 ## Migration Instructions
 
@@ -11,16 +13,15 @@ NOTE: this change is not backwards compatible; migrating to the new SDK requires
 
 ### Install New SDK
 
-`npm i klaviyo-sdk`
-
+`npm install klaviyo-api`
 
 ### Update Client Instantiation
  
-The new library contains code for require and ES modules see how to import the new package according to your project in the [readme](https://github.com/klaviyo/klaviyo-node-sdk#usage-example)
+The new library contains code for require and ES modules see how to import the new package according to your project in the [readme](https://github.com/klaviyo/klaviyo-api-node#usage-example)
 
 ### Updating API Operations
 
-The new SDK has many name changes to both namespace and parameters (types+format). Please reference [this section](https://github.com/klaviyo/klaviyo-node-sdk#comprehensive-list-of-operations--parameters) for a comprehensive list of examples.
+The new SDK has many name changes to both namespace and parameters (types+format). Please reference [this section](https://github.com/klaviyo/klaviyo-api-node#comprehensive-list-of-operations--parameters) for a comprehensive list of examples.
 
 
 ## What is Klaviyo?
